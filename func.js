@@ -1,24 +1,16 @@
-function showTab(id, element) {
-    document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-    });
-
-    document.getElementById(id).classList.add('active');
-
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-
-    element.classList.add('active');
+function goToObf(name) {
+    localStorage.setItem("selectedObf", name);
+    window.location.href = "obfuscator.html";
 }
 
-function searchObfuscator() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const items = document.querySelectorAll(".obf-item");
+window.onload = function () {
+    const title = document.getElementById("obfTitle");
 
-    items.forEach(item => {
-        const title = item.querySelector("h2").innerText.toLowerCase();
-        item.style.display = title.includes(input) ? "block" : "none";
-    });
-}
-
+    if (title) {
+        const name = localStorage.getItem("selectedObf");
+        if (name) {
+            title.innerText = name;
+            document.getElementById("obfDesc").innerText = name + " full description here.";
+        }
+    }
+};
