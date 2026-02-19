@@ -4,122 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galactic Project</title>
-
-<style>
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: #0b0f14;
-    font-family: Inter, Arial, sans-serif;
-    color: #e6edf3;
-}
-
-.layout { display: flex; }
-
-/* SIDEBAR */
-.sidebar {
-    width: 260px;
-    height: 100vh;
-    position: fixed;
-    background: #0f141a;
-    border-right: 1px solid #1b222b;
-    padding: 20px;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-.nav-section {
-    margin-top: 25px;
-    font-size: 12px;
-    color: #7d8590;
-    text-transform: uppercase;
-}
-
-.nav-item {
-    margin-top: 8px;
-    padding: 9px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #c9d1d9;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.nav-item:hover { background: #161b22; }
-
-.nav-item.active {
-    background: #1f2933;
-}
-
-/* MAIN */
-.main {
-    margin-left: 260px;
-    margin-right: 240px;
-    padding: 60px 80px;
-    max-width: 900px;
-}
-
-h1 { font-size: 34px; margin-bottom: 10px; }
-h2 { margin-top: 25px; }
-
-p { color: #9ba3af; line-height: 1.6; }
-
-/* SEARCH */
-.search-box {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #1f2933;
-    background: #11161c;
-    color: #e6edf3;
-    font-size: 14px;
-    outline: none;
-}
-
-.search-box:focus {
-    border-color: #3b82f6;
-}
-
-/* OBF ITEM */
-.obf-item {
-    margin-top: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #1b222b;
-}
-
-/* RIGHT SIDEBAR */
-.rightbar {
-    width: 240px;
-    height: 100vh;
-    position: fixed;
-    right: 0;
-    padding: 60px 20px;
-    border-left: 1px solid #1b222b;
-    background: #0f141a;
-}
-
-.right-title {
-    font-size: 13px;
-    color: #7d8590;
-    margin-bottom: 15px;
-}
-
-.right-item {
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: #c9d1d9;
-}
-
-/* SECTIONS */
-.section { display: none; }
-.section.active { display: block; }
-</style>
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
 
@@ -135,102 +20,73 @@ p { color: #9ba3af; line-height: 1.6; }
         <div class="nav-item" onclick="showTab('credits', this)">Credits</div>
     </div>
 
+    <!-- SEARCH TOP RIGHT -->
+    <div class="top-search">
+        <svg class="search-icon" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5
+                   6.5 6.5 0 109.5 16a6.471 6.471 0 004.23-1.57l.27.28v.79
+                   l5 4.99L20.49 19l-4.99-5zM9.5 14
+                   A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z"/>
+        </svg>
+        <input 
+            type="text"
+            id="searchInput"
+            placeholder="Search Obfuscator"
+            onkeyup="searchObfuscator()"
+        >
+    </div>
+
     <!-- MAIN -->
     <div class="main">
 
-        <!-- Obfuscators -->
         <div id="obfuscators" class="section active">
             <h1>Obfuscators Supported</h1>
-            <p>List of supported obfuscators.</p>
-
-            <input 
-                type="text"
-                id="searchInput"
-                class="search-box"
-                placeholder="Search Obfuscator"
-                onkeyup="searchObfuscator()"
-            >
 
             <div id="obfuscatorList">
 
                 <div class="obf-item">
                     <h2>IronBrew 2</h2>
-                    <p>Write information here.</p>
+                    <p>Description here.</p>
                 </div>
 
                 <div class="obf-item">
                     <h2>MoonSec</h2>
-                    <p>Write information here.</p>
+                    <p>Description here.</p>
                 </div>
 
                 <div class="obf-item">
                     <h2>Synapse Xen</h2>
-                    <p>Write information here.</p>
+                    <p>Description here.</p>
                 </div>
 
                 <div class="obf-item">
                     <h2>PSU Obfuscator</h2>
-                    <p>Write information here.</p>
+                    <p>Description here.</p>
                 </div>
 
                 <div class="obf-item">
                     <h2>LuaObfuscator</h2>
-                    <p>Write information here.</p>
+                    <p>Description here.</p>
                 </div>
 
             </div>
         </div>
 
-        <!-- About -->
         <div id="about" class="section">
             <h1>About Project</h1>
-            <p>
-                Write your full project description here.
-            </p>
+            <p>Project description here.</p>
         </div>
 
-        <!-- Credits -->
         <div id="credits" class="section">
             <h1>Credits</h1>
             <p>Main Developer: YourName</p>
-            <p>Contributors: —</p>
         </div>
 
-    </div>
-
-    <!-- RIGHT -->
-    <div class="rightbar">
-        <div class="right-title">On this page</div>
-        <div class="right-item">Documentation</div>
     </div>
 
 </div>
 
-<script>
-function showTab(id, element) {
-    document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-    });
-
-    document.getElementById(id).classList.add('active');
-
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-
-    element.classList.add('active');
-}
-
-function searchObfuscator() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const items = document.querySelectorAll(".obf-item");
-
-    items.forEach(item => {
-        const title = item.querySelector("h2").innerText.toLowerCase();
-        item.style.display = title.includes(input) ? "block" : "none";
-    });
-}
-</script>
-
+<script src="func.js"></script>
 </body>
 </html>
