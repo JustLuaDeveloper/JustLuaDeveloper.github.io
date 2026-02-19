@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Obfuscator Panel</title>
+<title>Galactic Project</title>
 
 <style>
 * {
@@ -12,179 +12,172 @@
 
 body {
     margin: 0;
-    background: #0b0d14;
-    font-family: Arial, sans-serif;
-    color: #e6e6e6;
+    background: #0b0f14;
+    font-family: Inter, Arial, sans-serif;
+    color: #e6edf3;
+}
+
+/* Layout */
+.layout {
+    display: flex;
 }
 
 /* Sidebar */
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
+    width: 260px;
     height: 100vh;
-    width: 240px;
-    background: #11131a;
-    padding: 40px 20px;
-    border-right: 1px solid #1a1d26;
-}
-
-/* Button */
-.toggle-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    background: #1c1f2b;
-    color: #fff;
-    transition: 0.3s ease;
-}
-
-.toggle-btn:hover {
-    background: #25283a;
-}
-
-/* List */
-.list {
-    margin-top: 20px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-}
-
-.list.active {
-    max-height: 500px;
-}
-
-.list-item {
-    padding: 12px 10px;
-    border-bottom: 1px solid #1c1f2b;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.list-item:hover {
-    background: #1a1d26;
-    color: #9b7bff;
-}
-
-/* Modal */
-.modal {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s ease;
+    background: #0f141a;
+    border-right: 1px solid #1b222b;
+    padding: 20px;
 }
 
-.modal.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.modal-content {
-    background: #141824;
-    width: 600px;
-    max-width: 90%;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8);
-    transform: scale(0.9);
-    transition: 0.3s ease;
-}
-
-.modal.active .modal-content {
-    transform: scale(1);
-}
-
-.close-btn {
-    text-align: right;
-    cursor: pointer;
-    font-size: 14px;
-    color: #777;
-}
-
-.close-btn:hover {
-    color: white;
-}
-
-.modal-title {
-    margin-top: 10px;
+.logo {
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 25px;
 }
 
-.modal-body {
+.nav-section {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #7d8590;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #c9d1d9;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: #161b22;
+}
+
+.nav-item.active {
+    background: #1f2933;
+}
+
+/* Main */
+.main {
+    margin-left: 260px;
+    margin-right: 240px;
+    padding: 60px 80px;
+    max-width: 900px;
+}
+
+h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 40px;
+    font-size: 22px;
+}
+
+p {
+    color: #9ba3af;
+}
+
+/* Code block */
+.code {
     margin-top: 15px;
-    line-height: 1.6;
-    color: #cfcfcf;
+    background: #11161c;
+    border: 1px solid #1f2933;
+    padding: 18px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 14px;
+    overflow-x: auto;
+    color: #c9d1d9;
+}
+
+/* Right sidebar */
+.rightbar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    padding: 60px 20px;
+    border-left: 1px solid #1b222b;
+    background: #0f141a;
+}
+
+.right-title {
+    font-size: 14px;
+    color: #7d8590;
+    margin-bottom: 15px;
+}
+
+.right-item {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #c9d1d9;
+    cursor: pointer;
+}
+
+.right-item:hover {
+    color: white;
 }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <button class="toggle-btn" onclick="toggleList()">
-        Supported Obfuscators
-    </button>
+<div class="layout">
 
-    <div class="list" id="list">
-        <div class="list-item" onclick="openArticle('IronBrew 2')">IronBrew 2</div>
-        <div class="list-item" onclick="openArticle('MoonSec')">MoonSec</div>
-        <div class="list-item" onclick="openArticle('Synapse Xen')">Synapse Xen</div>
-        <div class="list-item" onclick="openArticle('PSU Obfuscator')">PSU Obfuscator</div>
-        <div class="list-item" onclick="openArticle('LuaObfuscator')">LuaObfuscator</div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Galactic Project</div>
+
+        <div class="nav-section">Documentation</div>
+        <div class="nav-item active">Introduction</div>
+        <div class="nav-item">About</div>
+
+        <div class="nav-section">Setup</div>
+        <div class="nav-item">Load Library</div>
+        <div class="nav-item">Themes</div>
+
+        <div class="nav-section">UI</div>
+        <div class="nav-item">Window</div>
+        <div class="nav-item">Tabs</div>
+        <div class="nav-item">Buttons</div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <div class="close-btn" onclick="closeModal()">✕ Close</div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-body" id="modalBody">
-            <!-- Ты сам вставишь текст статьи -->
+    <!-- Main Content -->
+    <div class="main">
+        <h1>Load Galactic Project</h1>
+        <p>Load Galactic Project using loadstring method.</p>
+
+        <h2>Load Methods</h2>
+
+        <p>Load latest version:</p>
+        <div class="code">
+local Galactic = loadstring(game:HttpGet("https://your-link/latest.lua"))()
         </div>
+
+        <p>Load selected version:</p>
+        <div class="code">
+local Version = "1.0.0"
+local Galactic = loadstring(game:HttpGet("https://your-link/" .. Version .. ".lua"))()
+        </div>
+
+        <h2>Configuration</h2>
+        <p>Configure the library here. You can edit this section.</p>
     </div>
+
+    <!-- Right Sidebar -->
+    <div class="rightbar">
+        <div class="right-title">On this page</div>
+        <div class="right-item">Load Methods</div>
+        <div class="right-item">Configuration</div>
+    </div>
+
 </div>
-
-<script>
-function toggleList() {
-    document.getElementById("list").classList.toggle("active");
-}
-
-function openArticle(name) {
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
-    const body = document.getElementById("modalBody");
-
-    title.innerText = name;
-
-    // Тут можешь писать статьи
-    const articles = {
-        "IronBrew 2": "Write article about IronBrew 2 here...",
-        "MoonSec": "Write article about MoonSec here...",
-        "Synapse Xen": "Write article about Synapse Xen here...",
-        "PSU Obfuscator": "Write article about PSU Obfuscator here...",
-        "LuaObfuscator": "Write article about LuaObfuscator here..."
-    };
-
-    body.innerText = articles[name] || "No article yet.";
-
-    modal.classList.add("active");
-}
-
-function closeModal() {
-    document.getElementById("modal").classList.remove("active");
-}
-</script>
 
 </body>
 </html>
