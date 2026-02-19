@@ -17,7 +17,7 @@ body {
 
 .layout { display: flex; }
 
-/* LEFT SIDEBAR */
+/* SIDEBAR */
 .sidebar {
     width: 260px;
     height: 100vh;
@@ -65,21 +65,32 @@ body {
 }
 
 h1 { font-size: 34px; margin-bottom: 10px; }
-h2 { margin-top: 35px; font-size: 22px; }
+h2 { margin-top: 25px; }
 
 p { color: #9ba3af; line-height: 1.6; }
 
-/* Code */
-.code {
-    margin-top: 15px;
-    background: #11161c;
+/* SEARCH */
+.search-box {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
     border: 1px solid #1f2933;
-    padding: 18px;
-    border-radius: 10px;
-    font-family: monospace;
+    background: #11161c;
+    color: #e6edf3;
     font-size: 14px;
-    overflow-x: auto;
-    color: #c9d1d9;
+    outline: none;
+}
+
+.search-box:focus {
+    border-color: #3b82f6;
+}
+
+/* OBF ITEM */
+.obf-item {
+    margin-top: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #1b222b;
 }
 
 /* RIGHT SIDEBAR */
@@ -105,7 +116,7 @@ p { color: #9ba3af; line-height: 1.6; }
     color: #c9d1d9;
 }
 
-/* Hidden sections */
+/* SECTIONS */
 .section { display: none; }
 .section.active { display: block; }
 </style>
@@ -124,52 +135,72 @@ p { color: #9ba3af; line-height: 1.6; }
         <div class="nav-item" onclick="showTab('credits', this)">Credits</div>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div class="main">
 
-        <!-- Supported Obfuscators -->
+        <!-- Obfuscators -->
         <div id="obfuscators" class="section active">
-            <h1>About Galactic</h1>
+            <h1>Obfuscators Supported</h1>
             <p>List of supported obfuscators.</p>
 
-            <h2>IronBrew 2</h2>
-            <p>Write information here.</p>
+            <input 
+                type="text"
+                id="searchInput"
+                class="search-box"
+                placeholder="Search Obfuscator"
+                onkeyup="searchObfuscator()"
+            >
 
-            <h2>MoonSec</h2>
-            <p>Write information here.</p>
+            <div id="obfuscatorList">
 
-            <h2>Synapse Xen</h2>
-            <p>Write information here.</p>
+                <div class="obf-item">
+                    <h2>IronBrew 2</h2>
+                    <p>Write information here.</p>
+                </div>
+
+                <div class="obf-item">
+                    <h2>MoonSec</h2>
+                    <p>Write information here.</p>
+                </div>
+
+                <div class="obf-item">
+                    <h2>Synapse Xen</h2>
+                    <p>Write information here.</p>
+                </div>
+
+                <div class="obf-item">
+                    <h2>PSU Obfuscator</h2>
+                    <p>Write information here.</p>
+                </div>
+
+                <div class="obf-item">
+                    <h2>LuaObfuscator</h2>
+                    <p>Write information here.</p>
+                </div>
+
+            </div>
         </div>
 
-        <!-- About Project -->
+        <!-- About -->
         <div id="about" class="section">
-            <h1>About Galactic</h1>
+            <h1>About Project</h1>
             <p>
-                Write full project description here.
-                Explain what Galactic Project does,
-                its purpose and features.
+                Write your full project description here.
             </p>
-
-            <div class="code">
-local Galactic = loadstring(game:HttpGet("https://your-link/latest.lua"))()
-            </div>
         </div>
 
         <!-- Credits -->
         <div id="credits" class="section">
             <h1>Credits</h1>
             <p>Main Developer: YourName</p>
-            <p>UI Design: YourName</p>
-            <p>Special Thanks: Contributors</p>
+            <p>Contributors: —</p>
         </div>
 
     </div>
 
-    <!-- RIGHT SIDEBAR -->
+    <!-- RIGHT -->
     <div class="rightbar">
         <div class="right-title">On this page</div>
-        <div class="right-item">Galactic Project</div>
         <div class="right-item">Documentation</div>
     </div>
 
@@ -188,6 +219,16 @@ function showTab(id, element) {
     });
 
     element.classList.add('active');
+}
+
+function searchObfuscator() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const items = document.querySelectorAll(".obf-item");
+
+    items.forEach(item => {
+        const title = item.querySelector("h2").innerText.toLowerCase();
+        item.style.display = title.includes(input) ? "block" : "none";
+    });
 }
 </script>
 
