@@ -1,1 +1,104 @@
 
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #0b0f14;
+    font-family: Inter, Arial, sans-serif;
+    color: #e6edf3;
+}
+
+.layout { display: flex; }
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    background: #0f141a;
+    border-right: 1px solid #1b222b;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.nav-section {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #7d8590;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    margin-top: 8px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #c9d1d9;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-item:hover { background: #161b22; }
+.nav-item.active { background: #1f2933; }
+
+/* Main */
+.main {
+    margin-left: 260px;
+    padding: 100px 80px 60px 80px;
+    max-width: 900px;
+}
+
+h1 { font-size: 32px; }
+
+.obf-item {
+    margin-top: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #1b222b;
+}
+
+/* Sections */
+.section { display: none; }
+.section.active { display: block; }
+
+/* Top Search */
+.top-search {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    background: #11161c;
+    border: 1px solid #1f2933;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.top-search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e6edf3;
+    font-size: 14px;
+    padding-left: 8px;
+    width: 180px;
+}
+
+.top-search input:focus {
+    border: none;
+}
+
+/* Серый фокус вместо синего */
+.top-search:focus-within {
+    border-color: #555;
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    color: #7d8590;
+}
