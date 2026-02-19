@@ -6,9 +6,7 @@
 <title>Galactic Project</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -17,12 +15,9 @@ body {
     color: #e6edf3;
 }
 
-/* Layout */
-.layout {
-    display: flex;
-}
+.layout { display: flex; }
 
-/* Sidebar */
+/* LEFT SIDEBAR */
 .sidebar {
     width: 260px;
     height: 100vh;
@@ -35,34 +30,33 @@ body {
 .logo {
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .nav-section {
     margin-top: 25px;
-    font-size: 13px;
+    font-size: 12px;
     color: #7d8590;
     text-transform: uppercase;
 }
 
 .nav-item {
     margin-top: 8px;
-    padding: 8px 10px;
+    padding: 9px 12px;
     border-radius: 6px;
     cursor: pointer;
     color: #c9d1d9;
     font-size: 14px;
+    transition: 0.2s;
 }
 
-.nav-item:hover {
-    background: #161b22;
-}
+.nav-item:hover { background: #161b22; }
 
 .nav-item.active {
     background: #1f2933;
 }
 
-/* Main */
+/* MAIN */
 .main {
     margin-left: 260px;
     margin-right: 240px;
@@ -70,21 +64,12 @@ body {
     max-width: 900px;
 }
 
-h1 {
-    font-size: 34px;
-    margin-bottom: 10px;
-}
+h1 { font-size: 34px; margin-bottom: 10px; }
+h2 { margin-top: 35px; font-size: 22px; }
 
-h2 {
-    margin-top: 40px;
-    font-size: 22px;
-}
+p { color: #9ba3af; line-height: 1.6; }
 
-p {
-    color: #9ba3af;
-}
-
-/* Code block */
+/* Code */
 .code {
     margin-top: 15px;
     background: #11161c;
@@ -97,7 +82,7 @@ p {
     color: #c9d1d9;
 }
 
-/* Right sidebar */
+/* RIGHT SIDEBAR */
 .rightbar {
     width: 240px;
     height: 100vh;
@@ -109,7 +94,7 @@ p {
 }
 
 .right-title {
-    font-size: 14px;
+    font-size: 13px;
     color: #7d8590;
     margin-bottom: 15px;
 }
@@ -118,66 +103,93 @@ p {
     font-size: 14px;
     margin-bottom: 8px;
     color: #c9d1d9;
-    cursor: pointer;
 }
 
-.right-item:hover {
-    color: white;
-}
+/* Hidden sections */
+.section { display: none; }
+.section.active { display: block; }
 </style>
 </head>
 <body>
 
 <div class="layout">
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="logo">Galactic Project</div>
 
         <div class="nav-section">Documentation</div>
-        <div class="nav-item active">Introduction</div>
-        <div class="nav-item">About</div>
-
-        <div class="nav-section">Setup</div>
-        <div class="nav-item">Load Library</div>
-        <div class="nav-item">Themes</div>
-
-        <div class="nav-section">UI</div>
-        <div class="nav-item">Window</div>
-        <div class="nav-item">Tabs</div>
-        <div class="nav-item">Buttons</div>
+        <div class="nav-item active" onclick="showTab('obfuscators', this)">Supported Obfuscators</div>
+        <div class="nav-item" onclick="showTab('about', this)">About Project</div>
+        <div class="nav-item" onclick="showTab('credits', this)">Credits</div>
     </div>
 
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
     <div class="main">
-        <h1>Load Galactic Project</h1>
-        <p>Load Galactic Project using loadstring method.</p>
 
-        <h2>Load Methods</h2>
+        <!-- Supported Obfuscators -->
+        <div id="obfuscators" class="section active">
+            <h1>About Galactic</h1>
+            <p>List of supported obfuscators.</p>
 
-        <p>Load latest version:</p>
-        <div class="code">
+            <h2>IronBrew 2</h2>
+            <p>Write information here.</p>
+
+            <h2>MoonSec</h2>
+            <p>Write information here.</p>
+
+            <h2>Synapse Xen</h2>
+            <p>Write information here.</p>
+        </div>
+
+        <!-- About Project -->
+        <div id="about" class="section">
+            <h1>About Galactic</h1>
+            <p>
+                Write full project description here.
+                Explain what Galactic Project does,
+                its purpose and features.
+            </p>
+
+            <div class="code">
 local Galactic = loadstring(game:HttpGet("https://your-link/latest.lua"))()
+            </div>
         </div>
 
-        <p>Load selected version:</p>
-        <div class="code">
-local Version = "1.0.0"
-local Galactic = loadstring(game:HttpGet("https://your-link/" .. Version .. ".lua"))()
+        <!-- Credits -->
+        <div id="credits" class="section">
+            <h1>Credits</h1>
+            <p>Main Developer: YourName</p>
+            <p>UI Design: YourName</p>
+            <p>Special Thanks: Contributors</p>
         </div>
 
-        <h2>Configuration</h2>
-        <p>Configure the library here. You can edit this section.</p>
     </div>
 
-    <!-- Right Sidebar -->
+    <!-- RIGHT SIDEBAR -->
     <div class="rightbar">
         <div class="right-title">On this page</div>
-        <div class="right-item">Load Methods</div>
-        <div class="right-item">Configuration</div>
+        <div class="right-item">Galactic Project</div>
+        <div class="right-item">Documentation</div>
     </div>
 
 </div>
+
+<script>
+function showTab(id, element) {
+    document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    element.classList.add('active');
+}
+</script>
 
 </body>
 </html>
