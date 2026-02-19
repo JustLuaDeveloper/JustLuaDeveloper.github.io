@@ -3,115 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Panel</title>
+<title>Obfuscator Panel</title>
 
 <style>
-body {
-    margin: 0;
-    background: #0f0f14;
-    font-family: Arial, sans-serif;
-    color: white;
-    overflow-x: hidden;
+* {
+    box-sizing: border-box;
 }
 
-/* Левая панель */
+body {
+    margin: 0;
+    background: #0b0d14;
+    font-family: Arial, sans-serif;
+    color: #e6e6e6;
+}
+
+/* Sidebar */
 .sidebar {
     position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
-    width: 220px;
-    background: #14141c;
-    padding-top: 40px;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+    width: 240px;
+    background: #11131a;
+    padding: 40px 20px;
+    border-right: 1px solid #1a1d26;
 }
 
-/* Кнопка */
-.glow-button {
-    width: 180px;
-    margin: 0 auto;
+/* Button */
+.toggle-btn {
+    width: 100%;
     padding: 14px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     font-size: 15px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(
-        270deg,
-        #3a3aff,
-        #7b3aff,
-        #ff3af2,
-        #3a3aff
-    );
-    background-size: 600% 600%;
-    animation: gradientShift 6s ease infinite;
-    transition: transform 0.2s ease;
+    font-weight: 600;
+    background: #1c1f2b;
+    color: #fff;
+    transition: 0.3s ease;
 }
 
-.glow-button:hover {
-    transform: scale(1.05);
+.toggle-btn:hover {
+    background: #25283a;
 }
 
-@keyframes gradientShift {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-/* Список */
+/* List */
 .list {
     margin-top: 20px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease;
-    opacity: 0;
+    transition: max-height 0.4s ease;
 }
 
 .list.active {
     max-height: 500px;
+}
+
+.list-item {
+    padding: 12px 10px;
+    border-bottom: 1px solid #1c1f2b;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.list-item:hover {
+    background: #1a1d26;
+    color: #9b7bff;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.modal.active {
     opacity: 1;
+    pointer-events: all;
 }
 
-.list ul {
-    list-style: none;
-    padding: 0 20px;
+.modal-content {
+    background: #141824;
+    width: 600px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    transform: scale(0.9);
+    transition: 0.3s ease;
 }
 
-.list li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: color 0.3s ease;
+.modal.active .modal-content {
+    transform: scale(1);
 }
 
-.list li:hover {
-    color: #9f7bff;
+.close-btn {
+    text-align: right;
+    cursor: pointer;
+    font-size: 14px;
+    color: #777;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+.modal-title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-body {
+    margin-top: 15px;
+    line-height: 1.6;
+    color: #cfcfcf;
 }
 </style>
 </head>
-
 <body>
 
 <div class="sidebar">
-    <button class="glow-button" onclick="toggleList()">
+    <button class="toggle-btn" onclick="toggleList()">
         Supported Obfuscators
     </button>
 
-    <div class="list" id="obfList">
-        <ul>
-            <li>IronBrew 2</li>
-            <li>MoonSec</li>
-            <li>Synapse Xen</li>
-            <li>PSU Obfuscator</li>
-            <li>LuaObfuscator</li>
-        </ul>
+    <div class="list" id="list">
+        <div class="list-item" onclick="openArticle('IronBrew 2')">IronBrew 2</div>
+        <div class="list-item" onclick="openArticle('MoonSec')">MoonSec</div>
+        <div class="list-item" onclick="openArticle('Synapse Xen')">Synapse Xen</div>
+        <div class="list-item" onclick="openArticle('PSU Obfuscator')">PSU Obfuscator</div>
+        <div class="list-item" onclick="openArticle('LuaObfuscator')">LuaObfuscator</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <div class="close-btn" onclick="closeModal()">✕ Close</div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-body" id="modalBody">
+            <!-- Ты сам вставишь текст статьи -->
+        </div>
     </div>
 </div>
 
 <script>
 function toggleList() {
-    const list = document.getElementById("obfList");
-    list.classList.toggle("active");
+    document.getElementById("list").classList.toggle("active");
+}
+
+function openArticle(name) {
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const body = document.getElementById("modalBody");
+
+    title.innerText = name;
+
+    // Тут можешь писать статьи
+    const articles = {
+        "IronBrew 2": "Write article about IronBrew 2 here...",
+        "MoonSec": "Write article about MoonSec here...",
+        "Synapse Xen": "Write article about Synapse Xen here...",
+        "PSU Obfuscator": "Write article about PSU Obfuscator here...",
+        "LuaObfuscator": "Write article about LuaObfuscator here..."
+    };
+
+    body.innerText = articles[name] || "No article yet.";
+
+    modal.classList.add("active");
+}
+
+function closeModal() {
+    document.getElementById("modal").classList.remove("active");
 }
 </script>
 
