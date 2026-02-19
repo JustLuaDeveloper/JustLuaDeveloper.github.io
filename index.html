@@ -10,77 +10,46 @@
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="logo">Galactic Project</div>
-
-        <div class="nav-section">Documentation</div>
-        <div class="nav-item active" onclick="showTab('obfuscators', this)">Supported Obfuscators</div>
-        <div class="nav-item" onclick="showTab('about', this)">About Project</div>
-        <div class="nav-item" onclick="showTab('credits', this)">Credits</div>
     </div>
 
-    <!-- SEARCH TOP RIGHT -->
-    <div class="top-search">
-        <svg class="search-icon" viewBox="0 0 24 24">
-            <path fill="currentColor"
-                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5
-                   6.5 6.5 0 109.5 16a6.471 6.471 0 004.23-1.57l.27.28v.79
-                   l5 4.99L20.49 19l-4.99-5zM9.5 14
-                   A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z"/>
-        </svg>
-        <input 
-            type="text"
-            id="searchInput"
-            placeholder="Search Obfuscator"
-            onkeyup="searchObfuscator()"
-        >
-    </div>
-
-    <!-- MAIN -->
     <div class="main">
 
-        <div id="obfuscators" class="section active">
-            <h1>Obfuscators Supported</h1>
+        <h1>Obfuscators Supported</h1>
 
-            <div id="obfuscatorList">
+        <div class="grid">
 
-                <div class="obf-item">
-                    <h2>IronBrew 2</h2>
-                    <p>Description here.</p>
-                </div>
-
-                <div class="obf-item">
-                    <h2>MoonSec</h2>
-                    <p>Description here.</p>
-                </div>
-
-                <div class="obf-item">
-                    <h2>Synapse Xen</h2>
-                    <p>Description here.</p>
-                </div>
-
-                <div class="obf-item">
-                    <h2>PSU Obfuscator</h2>
-                    <p>Description here.</p>
-                </div>
-
-                <div class="obf-item">
-                    <h2>LuaObfuscator</h2>
-                    <p>Description here.</p>
-                </div>
-
+            <div class="card" onclick="goToObf('IronBrew 2')">
+                <h2>IronBrew 2</h2>
+                <p>Description here.</p>
             </div>
-        </div>
 
-        <div id="about" class="section">
-            <h1>About Project</h1>
-            <p>Project description here.</p>
-        </div>
+            <div class="card" onclick="goToObf('MoonSec')">
+                <h2>MoonSec</h2>
+                <p>Description here.</p>
+            </div>
 
-        <div id="credits" class="section">
-            <h1>Credits</h1>
-            <p>Main Developer: YourName</p>
+            <div class="card" onclick="goToObf('Synapse Xen')">
+                <h2>Synapse Xen</h2>
+                <p>Description here.</p>
+            </div>
+
+            <div class="card" onclick="goToObf('PSU Obfuscator')">
+                <h2>PSU Obfuscator</h2>
+                <p>Description here.</p>
+            </div>
+
+            <div class="card" onclick="goToObf('LuaObfuscator')">
+                <h2>LuaObfuscator</h2>
+                <p>Description here.</p>
+            </div>
+
+            <div class="card" onclick="goToObf('New Obfuscator')">
+                <h2>New Obfuscator</h2>
+                <p>Description here.</p>
+            </div>
+
         </div>
 
     </div>
